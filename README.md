@@ -29,6 +29,18 @@ This builds `apple/build/Dynamo.app` and registers it as the handler for `.fount
 
 **With Xcode:** open `apple/Dynamo.xcodeproj` and press ⌘R.
 
+## Windows: portable exe
+
+```sh
+windows/build.sh        # needs the .NET SDK; runs on macOS, Linux, or Windows
+```
+
+The output is `windows/build/Dynamo-windows.zip`. Unzip it anywhere and run `Dynamo.exe`. It needs no installer, no admin rights, and no .NET install. It uses the WebView2 runtime that ships with Windows 10 and 11.
+
+- The menus stay inside the window. Shortcuts are Ctrl+N, Ctrl+O, Ctrl+S, Ctrl+Shift+S, and Ctrl+W.
+- To open `.fountain` files by double-click, run `Associate .fountain files.cmd` once. It writes to the per-user registry (HKCU) and needs no admin rights. `Remove .fountain association.cmd` undoes it.
+- A build made on a Mac has a generic exe icon, because Windows icon resources can only be embedded on Windows. The GitHub Actions `build` workflow builds on Windows and fixes this.
+
 ## Using it
 
 - **Open:** double-click any `.fountain` file in Finder, drag it onto the Dynamo icon, or use File › Open… (⌘O). File › Open Recent lists your last files.

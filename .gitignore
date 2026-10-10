@@ -3,3 +3,6 @@ apple/build/
 xcuserdata/
 DerivedData/
 *.xcuserstate
+windows/bin/
+windows/obj/
+windows/build/

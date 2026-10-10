@@ -1,0 +1,34 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  windows:
+    # building on Windows also stamps the icon/version into Dynamo.exe
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 7.0.x
+      - shell: bash
+        run: |
+          dotnet publish windows/Dynamo.csproj -c Release -o out/Dynamo-windows --nologo
+          cp windows/dist/*.cmd windows/Dynamo.ico out/Dynamo-windows/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Dynamo-windows
+          path: out/Dynamo-windows
+
+  mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: apple/build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Dynamo-mac
+          path: apple/build/Dynamo.zip
