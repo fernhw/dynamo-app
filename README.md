@@ -4,6 +4,9 @@ Screenplay editor for videogames. Works with plain [Fountain](https://fountain.i
 
 One editor engine in `web/`, plus a thin native shell for each platform, the same way Discord ships.
 
+Originally running on my Nextcloud decided it couldn't be contained any longer
+
+
 ```
 web/                  shared engine (HTML/CSS/JS), the actual editor
   index.html          host page loaded by every shell
