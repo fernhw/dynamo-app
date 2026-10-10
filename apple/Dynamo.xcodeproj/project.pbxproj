@@ -1,0 +1,223 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D1A000000000000000000001 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B000000000000000000001 /* main.swift */; };
+		D1A000000000000000000002 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B000000000000000000002 /* Document.swift */; };
+		D1A000000000000000000003 /* EditorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B000000000000000000003 /* EditorWindowController.swift */; };
+		D1A000000000000000000004 /* Dynamo.icns in Resources */ = {isa = PBXBuildFile; fileRef = D1B000000000000000000004 /* Dynamo.icns */; };
+		D1A000000000000000000005 /* web in Resources */ = {isa = PBXBuildFile; fileRef = D1B000000000000000000005 /* web */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D1B000000000000000000001 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		D1B000000000000000000002 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		D1B000000000000000000003 /* EditorWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorWindowController.swift; sourceTree = "<group>"; };
+		D1B000000000000000000004 /* Dynamo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Dynamo.icns; sourceTree = "<group>"; };
+		D1B000000000000000000005 /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; name = web; path = ../web; sourceTree = "<group>"; };
+		D1B000000000000000000006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1B000000000000000000007 /* Dynamo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dynamo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D1C000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D1D000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				D1D000000000000000000002 /* Dynamo */,
+				D1B000000000000000000005 /* web */,
+				D1D000000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D1D000000000000000000002 /* Dynamo */ = {
+			isa = PBXGroup;
+			children = (
+				D1B000000000000000000001 /* main.swift */,
+				D1B000000000000000000002 /* Document.swift */,
+				D1B000000000000000000003 /* EditorWindowController.swift */,
+				D1B000000000000000000004 /* Dynamo.icns */,
+				D1B000000000000000000006 /* Info.plist */,
+			);
+			path = Dynamo;
+			sourceTree = "<group>";
+		};
+		D1D000000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D1B000000000000000000007 /* Dynamo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D1E000000000000000000001 /* Dynamo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1F000000000000000000002 /* Build configuration list for PBXNativeTarget "Dynamo" */;
+			buildPhases = (
+				D1C000000000000000000002 /* Sources */,
+				D1C000000000000000000001 /* Frameworks */,
+				D1C000000000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Dynamo;
+			productName = Dynamo;
+			productReference = D1B000000000000000000007 /* Dynamo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D1E000000000000000000002 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = D1F000000000000000000001 /* Build configuration list for PBXProject "Dynamo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D1D000000000000000000001;
+			productRefGroup = D1D000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D1E000000000000000000001 /* Dynamo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D1C000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1A000000000000000000004 /* Dynamo.icns in Resources */,
+				D1A000000000000000000005 /* web in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D1C000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1A000000000000000000001 /* main.swift in Sources */,
+				D1A000000000000000000002 /* Document.swift in Sources */,
+				D1A000000000000000000003 /* EditorWindowController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D1F100000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D1F100000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		D1F100000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Dynamo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fernhw.dynamo;
+				PRODUCT_NAME = Dynamo;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D1F100000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Dynamo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fernhw.dynamo;
+				PRODUCT_NAME = Dynamo;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D1F000000000000000000001 /* Build configuration list for PBXProject "Dynamo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1F100000000000000000001 /* Debug */,
+				D1F100000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1F000000000000000000002 /* Build configuration list for PBXNativeTarget "Dynamo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1F100000000000000000003 /* Debug */,
+				D1F100000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D1E000000000000000000002 /* Project object */;
+}

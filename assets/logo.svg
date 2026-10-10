@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- DYNAMO mark: three staggered strokes (same glyph as the editor brand), macOS icon grid -->
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="#1a1a28"/>
+  <rect x="247" y="297" width="430" height="80" fill="#d8a200"/>
+  <rect x="372" y="472" width="405" height="80" fill="#d8a200"/>
+  <rect x="522" y="647" width="255" height="80" fill="#d8a200"/>
+</svg>

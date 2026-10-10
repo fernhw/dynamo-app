@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dynamo</title>
+<link rel="stylesheet" href="css/screenplay-main.css">
+<style>
+  html, body { margin: 0; height: 100%; background: #1e1e2e; overflow: hidden; }
+  #screenplay-root { position: fixed; inset: 0; background: #1e1e2e; }
+  /* engine CSS assumes Nextcloud's 50px header on narrow screens */
+  @media (max-width: 768px) { .sp-editor { top: 0 !important; } }
+  /* desktop: File/Edit/Format/View live in the OS menu bar instead */
+  .dynamo-native .sp-menubar { display: none !important; }
+</style>
+</head>
+<body>
+<div id="screenplay-root"><div id="app-content-vue"></div></div>
+<script src="js/screenplay-main.js"></script>
+</body>
+</html>

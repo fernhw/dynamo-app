@@ -1,0 +1,1088 @@
+/* Courier Prime — the free clone of "Courier Final Draft", the standard
+   screenplay font. Heavier & fuller than thin Courier New, so the page reads
+   like Final Draft. Self-hosted (same-origin) so Nextcloud's CSP allows it. */
+@font-face {
+  font-family: 'Courier Prime'; font-style: normal; font-weight: 400;
+  font-display: swap; src: url('fonts/CourierPrime-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Courier Prime'; font-style: normal; font-weight: 700;
+  font-display: swap; src: url('fonts/CourierPrime-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Courier Prime'; font-style: italic; font-weight: 400;
+  font-display: swap; src: url('fonts/CourierPrime-Italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Courier Prime'; font-style: italic; font-weight: 700;
+  font-display: swap; src: url('fonts/CourierPrime-BoldItalic.woff2') format('woff2');
+}
+
+/* Minerva Modern — the wide humanist face used for the in-game dialogue BOX and
+   the thought BUBBLE (matches the Persona-style lettering). Self-hosted woff2 so
+   Nextcloud's CSP allows it. The family ships no plain Regular, so Bold serves
+   as the 400 weight, with true Bold(700)/Black(900) and italics. */
+@font-face {
+  font-family: 'Minerva Modern'; font-style: normal; font-weight: 400;
+  font-display: swap; src: url('fonts/MinervaModern.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Minerva Modern'; font-style: italic; font-weight: 400;
+  font-display: swap; src: url('fonts/MinervaModern-Italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Minerva Modern'; font-style: normal; font-weight: 700;
+  font-display: swap; src: url('fonts/MinervaModern-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Minerva Modern'; font-style: italic; font-weight: 700;
+  font-display: swap; src: url('fonts/MinervaModern-BoldItalic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Minerva Modern'; font-style: normal; font-weight: 900;
+  font-display: swap; src: url('fonts/MinervaModern-Black.woff2') format('woff2');
+}
+
+/* ── base ── */
+.app-screenplay, #app-content-vue { height: 100%; }
+
+/* ════ FILE LIST ════ */
+.sp-list-screen {
+  max-width: 600px; margin: 40px auto; padding: 0 20px;
+}
+.sp-list-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 24px;
+}
+.sp-list-title { color: #cdd6f4; font-size: 22px; margin: 0; }
+.sp-new-btn {
+  background: #89b4fa; color: #1e1e2e; border: 1px solid #5b7fc7;
+  padding: 8px 16px; border-radius: 0; cursor: pointer; font-size: 14px; font-weight: 600;
+}
+.sp-new-btn:hover { background: #b4d0fb; }
+.sp-file-list { list-style: none; padding: 0; margin: 0; }
+.sp-file-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 18px; margin-bottom: 8px;
+  background: #313244; border-radius: 0; cursor: pointer;
+  transition: background 0.15s;
+}
+.sp-file-item:hover { background: #45475a; }
+.sp-file-icon { font-size: 18px; }
+.sp-file-name { color: #cdd6f4; font-size: 15px; }
+.sp-list-loading, .sp-list-empty { color: #6c7086; text-align: center; padding: 40px 0; }
+.sp-list-error { color: #f38ba8; text-align: center; padding: 20px 0; }
+
+/* ════ EDITOR ════ */
+.sp-editor {
+  /* lock to the viewport below NC's 50px header so the flex column has a
+     definite height — otherwise the status bar is pushed below the fold */
+  height: calc(100vh - 50px); max-height: calc(100vh - 50px);
+  display: flex; flex-direction: column; background: #1e1e2e;
+  box-sizing: border-box; overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ════ classic word-processor chrome: menu bar (row 1) + element toolbar (row 2) ════ */
+.sp-chrome {
+  flex-shrink: 0;
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif; font-size: 11px; color: #000;
+  border-bottom: 1px solid #919b9c;
+}
+/* HARD RESET: Nextcloud's global button/input styles round/darken every control
+   and load after this file. Force every control in the chrome flat & square. */
+.sp-chrome button,
+.sp-chrome input,
+.sp-menu button {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  background-color: transparent !important;
+  color: #000 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  font-weight: normal !important;
+  border: 1px solid transparent;
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* ── ROW 1: menu bar ── */
+.sp-menubar {
+  display: flex; align-items: center; gap: 2px; flex-wrap: nowrap;
+  padding: 1px 6px; background: #ece9d8; min-height: 22px;
+  box-shadow: inset 0 1px 0 #ffffff;
+}
+/* brand: thunderbolt logo + DYNAMO wordmark */
+.sp-brand {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 0 8px 0 2px; white-space: nowrap; user-select: none; cursor: default;
+}
+.sp-logo { flex-shrink: 0; stroke: #d8a200; stroke-width: 3; stroke-linecap: square; }
+.sp-brand-text { font-weight: 700; font-size: 12px; letter-spacing: 1px; color: #1a1a28; }
+
+/* menu words (File / Edit / Format / View) — plain text until hover/open */
+.sp-menus { display: inline-flex; align-items: center; gap: 0; }
+.sp-menu-wrap { position: relative; display: inline-block; }
+.sp-menu-title {
+  background: transparent; border: 1px solid transparent !important; color: #000;
+  font-size: 11px; padding: 1px 8px; cursor: default; white-space: nowrap; line-height: 16px;
+}
+.sp-menu-wrap:hover > .sp-menu-title,
+.sp-menu-wrap.open > .sp-menu-title {
+  border-color: #aca899 #6a6a64 #6a6a64 #aca899 !important;
+  background: #fdfcf7 !important;
+}
+.sp-menu {
+  display: none; position: absolute; top: 100%; left: 0; z-index: 300;
+  min-width: 180px; background: #fff;
+  border: 1px solid #6a6a64; box-shadow: 2px 2px 3px rgba(0,0,0,0.3); padding: 2px;
+}
+.sp-menu-wrap.open > .sp-menu { display: block; }
+.sp-menu-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  width: 100%; box-sizing: border-box; text-align: left;
+  background: transparent; color: #000; font-size: 11px;
+  padding: 3px 22px 3px 22px; cursor: default; white-space: nowrap;
+}
+.sp-menu-row:hover:not(:disabled) { background: #316ac5 !important; color: #fff !important; }
+.sp-menu-row:hover:not(:disabled) .sp-menu-accel { color: #dce6f7 !important; }
+.sp-menu-row:disabled { color: #9d9d93 !important; cursor: default; }
+.sp-menu-row-checked { font-weight: bold; }
+.sp-menu-row-checked .sp-menu-lbl { margin-left: -14px; }
+.sp-menu-row-danger:hover:not(:disabled) { background: #a30000 !important; }
+.sp-menu-lbl { flex: 1; }
+.sp-menu-accel { color: #888; font-size: 10px; }
+.sp-menu-sep { height: 1px; background: #d4d0c8; margin: 3px 2px; }
+
+.sp-menu-spacer { flex: 1 1 auto; min-width: 8px; }
+
+/* file title: plain text, click to edit */
+.sp-title-input {
+  background: transparent; border: 1px solid transparent !important;
+  color: #000 !important; font-size: 11px; font-weight: 700; outline: none;
+  padding: 1px 4px; flex: 0 1 200px; min-width: 60px;
+}
+.sp-title-input:hover { border-color: #aca899 !important; background: #fff !important; }
+.sp-title-input:focus { border-color: #7f9db9 !important; background: #fff !important; flex-basis: 260px; }
+
+.sp-last-saved { font-size: 10px; color: #555; white-space: nowrap; padding: 0 6px; }
+
+/* Save button with floppy glyph */
+.sp-save-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: #f5f4ea !important; border: 1px solid #aca899 !important; color: #000 !important;
+  padding: 1px 8px; cursor: pointer; font-size: 11px; white-space: nowrap;
+}
+.sp-save-btn:hover { background: #fdfcf7 !important; border-color: #7f9db9 !important; }
+.sp-save-btn:active { background: #e3e1d4 !important; }
+.sp-save-btn:disabled { opacity: 0.55; }
+.sp-save-ico { font-size: 12px; line-height: 1; }
+
+/* ── ROW 2: element-type icon toolbar ── */
+.sp-typebar {
+  display: flex; align-items: center; flex-wrap: nowrap; gap: 1px;
+  padding: 2px 6px; background: #f4f3ea; min-width: 0; overflow-x: auto;
+  box-shadow: inset 0 1px 0 #ffffff;
+}
+.sp-type-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: transparent; border: 1px solid transparent !important; color: #000;
+  padding: 2px 6px; cursor: pointer; font-size: 11px; white-space: nowrap; line-height: 14px;
+}
+.sp-type-btn:hover:not(:disabled) { border-color: #aca899 #6a6a64 #6a6a64 #aca899 !important; background: #fdfcf7 !important; }
+.sp-type-btn:active:not(:disabled) { background: #e3e1d4 !important; }
+.sp-type-btn.active {
+  background: #cfe0f7 !important;
+  border-color: #6a6a64 #fff #fff #6a6a64 !important;
+}
+.sp-type-btn:disabled { color: #9d9d93 !important; cursor: default; opacity: 0.6; }
+.sp-type-ico { font-size: 13px; line-height: 1; }
+.sp-type-name { font-size: 11px; }
+.sp-type-btn-ico { font-size: 14px; padding: 2px 7px; }
+
+.sp-tb-divider { width: 1px; align-self: stretch; background: #c4c0b4; margin: 1px 4px; }
+.sp-tb-stats { margin-left: auto; font-size: 10px; color: #555; white-space: nowrap; padding-left: 10px; }
+
+/* View ▸ Element Labels toggle */
+.sp-hide-labels .sp-block-label { display: none !important; }
+
+
+.sp-layout { flex: 1 1 auto; min-height: 0; overflow: hidden; display: flex; background: #6e6e6e; position: relative; }
+.sp-script-area { flex: 1; overflow-y: auto; padding: 30px 20px; background: #6e6e6e; position: relative; }
+
+/* ── foldable PREVIEW SIDE SECTION (View → Preview Panel / toolbar button) ───
+   A grey panel pinned to the right matching the editor canvas. Collapsed by
+   default (width 0); when the editor has .sp-dock-open it expands and, because
+   the script area is flex:1, the editor slides left to make room — no overlap.
+   A draggable separator on its left edge resizes the panel. ── */
+.sp-dock {
+  flex: 0 0 0; width: 0; overflow: hidden;
+  display: flex; flex-direction: column;
+  background: #6e6e6e;
+  border-left: 1px solid rgba(0,0,0,.18);
+  transition: width .18s ease, flex-basis .18s ease;
+}
+.sp-editor.sp-dock-open .sp-dock { flex-basis: 542px; width: 542px; }
+/* draggable separator between editor and panel — only active when open */
+.sp-dock-sep {
+  flex: 0 0 0; width: 0; cursor: col-resize; position: relative; z-index: 20;
+  background: rgba(0,0,0,.18);
+}
+.sp-editor.sp-dock-open .sp-dock-sep { flex-basis: 5px; width: 5px; }
+.sp-dock-sep:hover, .sp-dock-sep:active { background: #4a90d9; }
+.sp-dock-head {
+  flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 12px; border-bottom: 1px solid rgba(0,0,0,.18);
+  background: rgba(0,0,0,.06);
+}
+.sp-dock-title {
+  font-family: 'SFMono-Regular', Menlo, monospace; font-size: 10px; font-weight: 700;
+  letter-spacing: 1.5px; color: #2b2b2b;
+}
+.sp-dock-close {
+  background: none; border: none; color: #3a3a3a; cursor: pointer;
+  font-size: 18px; line-height: 1; padding: 0 4px; border-radius: 4px;
+}
+.sp-dock-close:hover { color: #000; background: rgba(0,0,0,.12); }
+.sp-dock-body {
+  flex: 1 1 auto; overflow-y: auto; padding: 16px 12px;
+  font-family: 'Helvetica Neue', Arial, sans-serif; color: #1d1d1d;
+  display: flex; flex-direction: column; align-items: center;
+}
+/* the preview renders at a FIXED width and stays centred no matter how wide the
+   panel is dragged — so the in-game box / subtitle / bubble always look right */
+.sp-dock-body > * { width: 514px; max-width: 100%; flex: 0 0 auto; }
+.sp-dock-empty {
+  color: #d8d8d8; font-size: 13px; text-align: center; padding: 24px 8px; line-height: 1.5;
+}
+.sp-dock-body .sp-gpv-modes { margin-top: 10px; }
+/* the preview internals were tuned for a dark floating popup — re-tone the meta
+   text/labels/dividers so they read on the grey side panel */
+.sp-dock-body .sp-gpv-timing-val { color: #1d1d1d; }
+.sp-dock-body .sp-gpv-stats { color: #2b2b2b; }
+.sp-dock-body .sp-gpv-stats > span {
+  background: rgba(0,0,0,.08); border-color: rgba(0,0,0,.12);
+}
+.sp-dock-body .sp-gpv-mode-label { color: #2b2b2b; }
+.sp-dock-body .sp-gpv-modes { border-top-color: rgba(0,0,0,.18); }
+.sp-dock-body .sp-gpv-timing-bar { background: rgba(0,0,0,.15); }
+/* preview toggle button in the menu bar — [ |] panel icon */
+.sp-preview-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 26px; margin: 0 6px; padding: 0;
+  background: none; border: 1px solid transparent; border-radius: 5px;
+  color: #555; cursor: pointer;
+}
+.sp-preview-btn:hover { background: rgba(0,0,0,.07); color: #222; }
+.sp-preview-btn.active { background: #e3edf9; border-color: #b7d2ee; color: #2f6fb3; }
+.sp-page {
+  max-width: 8.5in; margin: 0 auto; background: #ffffff;
+  min-height: 60vh; position: relative;
+  padding: 1in 1in 1in 1.5in; /* industry: 1.5" left, 1" all others */
+  box-sizing: border-box;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.45);
+  border: 1px solid #4a4a4a;
+}
+
+/* ── Title card: locked Fountain title-page, shown above the screenplay ── */
+.sp-title-card {
+  position: relative;
+  margin: -0.5in -1in 0.7in -1.5in;  /* bleed to page edges */
+  padding: 0.55in 1in 0.45in 1.5in;
+  background: #f7f5ee;
+  border-bottom: 2px solid #c8c3b0;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 16px;
+}
+.sp-tc-inner { flex: 1; }
+.sp-tc-title {
+  font-family: 'Courier Prime', 'Courier New', Courier, monospace;
+  font-size: 18pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.04em; color: #111; line-height: 1.2;
+  margin-bottom: 6px;
+}
+.sp-tc-author {
+  font-family: 'Courier Prime', 'Courier New', Courier, monospace;
+  font-size: 11pt; color: #333; margin-bottom: 4px;
+}
+.sp-tc-meta {
+  font-family: 'Courier Prime', 'Courier New', Courier, monospace;
+  font-size: 9pt; color: #666; margin-bottom: 2px;
+}
+.sp-tc-edit {
+  flex-shrink: 0; align-self: flex-start;
+  background: none; border: 1px solid #bbb; border-radius: 3px;
+  font-size: 10px; color: #888; padding: 3px 7px; cursor: pointer;
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+  opacity: 0; transition: opacity 0.15s;
+}
+.sp-title-card:hover .sp-tc-edit { opacity: 1; }
+.sp-tc-badges { display: flex; gap: 6px; margin: 5px 0 3px; flex-wrap: wrap; }
+.sp-tc-badge {
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+  font-size: 9px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  padding: 2px 6px; border-radius: 3px;
+  background: #ddd; color: #555; border: 1px solid #bbb;
+}
+.sp-tc-badge-dynamo { background: #2c3e50; color: #fff; border-color: #1a2530; }
+.sp-tc-badge-plain  { background: #e8f0fb; color: #2f6fb3; border-color: #b7d2ee; }
+
+/* ── Dynamo-off mode: suppress all game-specific UI (tags, limits, badges) ─ */
+.sp-dynamo-off .sp-block[data-type="tag-id"]           { display: none !important; }
+.sp-dynamo-off .sp-block[data-type="tag-id"]::before   { display: none !important; }
+.sp-dynamo-off .sp-box-over-limit-first::after         { display: none !important; }
+.sp-dynamo-off .sp-box-over-limit-first .sp-preview,
+.sp-dynamo-off .sp-box-over-limit-first .sp-ta         { outline: none !important; }
+.sp-dynamo-off .sp-line-over-badge                     { display: none !important; }
+.sp-dynamo-off .sp-line-over                           { background: none !important; color: inherit !important; }
+.sp-dynamo-off .sp-game-dialogue                       { background: none !important; }
+
+/* ── bottom status bar (Final Draft style: thin grey strip with zoom) ── */
+.sp-statusbar {
+  flex-shrink: 0; display: flex; align-items: center; justify-content: space-between;
+  height: 22px; padding: 0 8px; gap: 12px;
+  background: #ece9d8; border-top: 1px solid #919b9c;
+  box-shadow: inset 0 1px 0 #ffffff;
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif; font-size: 11px; color: #333;
+}
+.sp-status-left { white-space: nowrap; color: #555; }
+.sp-statusbar button,
+.sp-statusbar input {
+  border-radius: 0 !important; box-shadow: none !important; background-image: none !important;
+  min-height: 0 !important; height: auto !important; font-weight: normal !important;
+  color: #000 !important; -webkit-appearance: none; appearance: none;
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+}
+.sp-zoom { display: inline-flex; align-items: center; gap: 4px; }
+.sp-zoom-btn {
+  background: transparent !important; border: 1px solid transparent !important;
+  font-size: 12px !important; line-height: 14px !important; width: 18px; height: 16px !important;
+  text-align: center; cursor: pointer; padding: 0 !important; box-sizing: border-box;
+}
+.sp-zoom-btn:hover { border-color: #aca899 #6a6a64 #6a6a64 #aca899 !important; background: #fdfcf7 !important; }
+.sp-zoom-btn:active { background: #e3e1d4 !important; }
+/* current-zoom button + preset menu */
+.sp-zoom-dd { position: relative; display: inline-block; }
+.sp-zoom-val {
+  background: #fff !important; border: 1px solid #7f9db9 !important;
+  font-size: 10px !important; line-height: 14px !important; padding: 0 4px !important;
+  min-width: 38px; height: 16px !important; box-sizing: border-box; cursor: pointer;
+}
+.sp-zoom-val:hover { background: #fdfcf7 !important; }
+.sp-zoom-menu {
+  display: none; position: absolute; bottom: 100%; left: 0; z-index: 300;
+  min-width: 64px; background: #fff; border: 1px solid #6a6a64;
+  box-shadow: 1px -2px 3px rgba(0,0,0,0.3); padding: 2px; margin-bottom: 1px;
+}
+.sp-zoom-dd.open > .sp-zoom-menu { display: block; }
+.sp-zoom-item {
+  display: block; width: 100%; text-align: left; background: transparent !important;
+  border: none !important; font-size: 11px; padding: 3px 10px; cursor: default;
+}
+.sp-zoom-item:hover { background: #316ac5 !important; color: #fff !important; }
+.sp-zoom-slider { width: 110px; cursor: pointer; -webkit-appearance: none; appearance: none; height: 4px; background: #c4c0b4 !important; }
+.sp-zoom-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 11px; height: 14px; background: #f4f3ea; border: 1px solid #7f9db9; cursor: pointer; }
+.sp-zoom-slider::-moz-range-thumb { width: 11px; height: 14px; background: #f4f3ea; border: 1px solid #7f9db9; cursor: pointer; border-radius: 0; }
+
+/* ── blocks ── */
+.sp-block {
+  margin: 0; position: relative; border-radius: 2px;
+}
+/* inter-block spacing: blank line before new scene elements, tight within dialogue */
+.sp-block[data-type="scene-heading"] { margin-top: 1em; }
+.sp-block[data-type="action"]        { margin-top: 1em; }
+.sp-block[data-type="character"]     { margin-top: 1em; }
+.sp-block[data-type="parenthetical"] { margin-top: 0; }
+.sp-block[data-type="dialogue"]      { margin-top: 0; }
+.sp-block[data-type="transition"]    { margin-top: 1em; }
+.sp-block[data-type="general"]       { margin-top: 0.5em; }
+.sp-block:first-child                { margin-top: 0 !important; }
+/* floating label — overlays ABOVE the line in the margin gap, reserves NO space,
+   so blocks hug their text tightly (no empty band to highlight in select mode) */
+.sp-block-label {
+  position: absolute; top: -12px; left: 0;
+  font-size: 9px; line-height: 12px;
+  color: #bbbbbb; pointer-events: none; white-space: nowrap;
+  opacity: 1; transition: opacity 0.1s;
+}
+.sp-block-label-hidden { opacity: 0; }
+.sp-block-selected { background: rgba(100,160,255,.15); outline: 1px solid #4488cc; border-radius: 2px; }
+.sp-select-indicator { display: inline-block; width: 20px; font-size: 13px; color: #4488cc; cursor: pointer; user-select: none; vertical-align: middle; }
+
+/* ── drag-to-reorder handle: grip in the left margin. Shows ONLY for SELECTED
+   blocks (never on plain hover — that nudged the industry-standard layout).
+   Absolutely positioned, so it adds ZERO height to the line. ── */
+.sp-drag-handle {
+  position: absolute; left: -1.15in; top: 0; bottom: 0;
+  width: 20px; display: flex; align-items: center; justify-content: center;
+  color: #b8b8b8; font-size: 13px; letter-spacing: -2px;
+  cursor: grab; user-select: none; opacity: 0; transition: opacity .1s;
+  z-index: 40; pointer-events: none;
+}
+.sp-block-selected > .sp-drag-handle { opacity: 1; pointer-events: auto; }
+/* Tags get a SINGLE drag affordance: the visible grip BOX that appears next
+   to the edit bar when the tag is selected or being edited (rule below). No
+   always-on ghost grip — that caused stray grabs on adjacent rows. To drag a
+   tag: click it to select, then drag from the box on its left. */
+.sp-block[data-type="tag-id"] > .sp-drag-handle {
+  opacity: 0;
+  pointer-events: none;
+}
+/* when a dynamo tag is HOVERED, SELECTED, or being EDITED, its grip becomes a
+   real, visible drag BOX — INSIDE the page (on the rule line), never out in
+   the outside-left gutter. tag-id blocks are height:0, so the box gets an
+   explicit height and matches the edit bar's top offset at -1.2em.
+   Hover-to-reveal makes tags draggable any number of times without first
+   having to click-to-select. */
+.sp-block[data-type="tag-id"]:hover > .sp-drag-handle,
+.sp-block[data-type="tag-id"].sp-block-selected > .sp-drag-handle,
+.sp-block[data-type="tag-id"].sp-tag-editing > .sp-drag-handle {
+  opacity: 1; pointer-events: auto;
+  top: -1.2em; bottom: auto; height: 1.7em;
+  left: calc(-1.18in - 15px); width: 22px;
+  background: #d8d6ca; border: 1px solid #aca899; border-right: none;
+  border-radius: 2px 0 0 2px; color: #444; font-size: 13px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  z-index: 101;
+}
+/* While the edit bar is open it starts at calc(-1.9in - 10px), which is
+   further left than the resting grip position — so the grip would land INSIDE
+   the text area and obscure what the user is typing. Push it flush outside the
+   edit bar's left edge instead. */
+.sp-block[data-type="tag-id"].sp-block-selected > .sp-drag-handle,
+.sp-block[data-type="tag-id"].sp-tag-editing > .sp-drag-handle {
+  left: calc(-1.9in - 10px - 22px);
+}
+.sp-block[data-type="tag-id"]:hover > .sp-drag-handle:hover,
+.sp-block[data-type="tag-id"].sp-block-selected > .sp-drag-handle:hover,
+.sp-block[data-type="tag-id"].sp-tag-editing > .sp-drag-handle:hover {
+  background: #f4f3ea; border-color: #7f9db9; color: #1a1a28;
+}
+.sp-drag-handle:hover { color: #555; }
+.sp-drag-handle:active { cursor: grabbing; }
+body.sp-dragging-blocks, body.sp-dragging-blocks * { cursor: grabbing !important; user-select: none !important; }
+.sp-drop-indicator {
+  position: fixed; height: 0; display: none; z-index: 9998;
+  border-top: 2px solid #d8a200; pointer-events: none;
+  box-shadow: 0 0 4px rgba(216,162,0,.6);
+}
+.sp-drop-indicator::before {
+  content: ''; position: absolute; left: -4px; top: -4px;
+  width: 6px; height: 6px; border-radius: 50%; background: #d8a200;
+}
+.sp-drag-ghost {
+  position: fixed; z-index: 10000; pointer-events: none;
+  background: #d8a200; color: #fff; font: 11px Tahoma, sans-serif;
+  padding: 2px 8px; border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.4); white-space: nowrap;
+}
+
+/* hidden states */
+.sp-ta-hidden    { display: none !important; }
+.sp-preview-hidden { display: none !important; }
+
+/* preview div inherits all .sp-ta column styles, adds click affordance */
+.sp-preview {
+  cursor: text; white-space: pre-wrap; word-break: break-word;
+  min-height: 1.2em;
+}
+.sp-preview-empty { color: #aaaaaa; font-style: italic; }
+
+/* inline [[tag]] chips */
+.sp-hl {
+  background: #fffb8f; color: #000; border-radius: 2px; padding: 0 1px;
+}
+.sp-chip {
+  display: inline-block; font-size: 9pt; border-radius: 3px;
+  padding: 0 4px; line-height: 1.4; vertical-align: baseline;
+  font-family: 'Courier Prime', 'Courier New', Courier, monospace;
+}
+.sp-chip-tag  { background: #e8e8f0; color: #555; border: 1px solid #ccc; }
+.sp-chip-icon { background: #fff3cd; color: #7a5900; border: 1px solid #e6c700; }
+.sp-chip-var  { background: #d4edda; color: #155724; border: 1px solid #92d4a0; }
+/* the tag-id NODE LABEL is now a tiny caret marker (the real id is on hover) so
+   it sits quietly in the gutter and never competes with the dialogue. */
+.sp-preview.sp-ta-tag-id .sp-chip-caret,
+.sp-chip-caret {
+  background: transparent !important;
+  border: none !important;
+  color: rgba(0,0,0,0.22) !important;
+  font-size: 9pt !important;
+  font-weight: 400;
+  padding: 0 4px 0 0 !important;
+  cursor: pointer;
+}
+.sp-chip-caret:hover { color: rgba(0,0,0,0.45) !important; }
+
+/* ── textarea types ── */
+.sp-ta {
+  width: 100%; background: transparent; border: none !important; color: #000000;
+  font-family: 'Courier Prime', 'Courier New', Courier, monospace; font-size: 12pt; line-height: 1.2;
+  resize: none; outline: none; display: block; box-sizing: border-box;
+  /* overflow:visible lets spell-check underlines paint below the text baseline.
+     overflow:hidden clips them because squiggles render outside the content box. */
+  overflow: visible;
+  padding: 0 !important;
+  margin-top: 0 !important; margin-bottom: 0 !important;
+  min-height: 0 !important;
+}
+/* editing indicator: a subtle light-grey wash on the active line — hugs the
+   text tightly (no halo/padding), no border, no rounded popup, no height change. */
+textarea.sp-ta:not(.sp-ta-tag-id) {
+  background: #f0f0f0;
+  border-radius: 0;
+  /* Explicitly unset box-shadow suppression Nextcloud globals may have applied,
+     so WebKit/Blink can paint spell-check squiggles (they use the same layer). */
+  box-shadow: unset !important;
+}
+.sp-ta-scene-heading { text-transform: uppercase; font-weight: bold; }
+/* Character: bold, all-caps */
+.sp-ta-character     { text-transform: uppercase; font-weight: bold; color: #000 !important; margin-left: 22ch; max-width: 28ch; }
+.sp-ta-parenthetical { margin-left: 16ch; max-width: 26ch; color: #6a6a6a !important; }
+.sp-ta-dialogue      { margin-left: 10ch; max-width: 36ch; }
+.sp-ta-transition    { text-align: right; text-transform: uppercase; }
+/* tag-id blocks: ZERO vertical space — a horizontal rule separator.
+   The block has height:0; the rule is drawn with ::before; the tag text is
+   absolutely positioned on the rule so it never pushes the script down. */
+.sp-block[data-type="tag-id"] {
+  height: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible;
+  position: relative;
+}
+.sp-block[data-type="tag-id"]::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: calc(-1.18in - 15px);
+  right: calc(-1in - 10px);
+  top: 0;
+  height: 1px;
+  border-top: none;
+  background: linear-gradient(to right,
+    rgba(0,0,0,0.05) 0%,
+    rgba(0,0,0,0.05) 22%,
+    rgba(0,0,0,0) 28%,
+    rgba(0,0,0,0) 72%,
+    rgba(0,0,0,0.05) 78%,
+    rgba(0,0,0,0.05) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+/* preview (not editing): the tag-id collapses to a tiny caret marker that sits
+   just left of the dialogue column — visible and clickable, but quiet so the
+   writing stays the hero. Hover shows the full id (title); click edits. */
+.sp-preview.sp-ta-tag-id {
+  position: absolute !important;
+  top: calc(-0.55em + 1px);
+  left: -1.4in !important;
+  margin: 0 !important; padding: 0 !important;
+  max-width: none !important; width: auto !important;
+  line-height: 1; background: transparent !important;
+  border: none !important; outline: none !important;
+  z-index: 2; cursor: pointer;
+  font-family: 'Courier Prime', 'Courier New', Courier, monospace;
+}
+/* textarea while editing: break out of zero-height into a readable bar.
+   tag-id blocks have height:0, so this MUST break out to be usable — but keep it
+   flat and light-grey (no cream, no heavy shadow, minimal radius). */
+.sp-ta.sp-ta-tag-id.sp-ta-tag-editing {
+  position: absolute !important;
+  top: -1.2em;
+  left: calc(-1.9in - 10px) !important;
+  width: calc(100% + 1.9in + 1in + 20px) !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 3px 8px 3px 28px !important;
+  font-size: 9pt !important; color: #000 !important;
+  line-height: 1.4;
+  background: #f0f0f0 !important;
+  border: none !important;
+  border-radius: 1px;
+  box-shadow: none;
+  z-index: 100;
+  resize: none;
+}
+/* duplicate-tag warning */
+.sp-tag-duplicate { border-color: #e00 !important; background: #fff0f0 !important; }
+.sp-tag-warn {
+  position: absolute; left: calc(-1.5in - 10px); top: 1em;
+  font-size: 8pt; color: #c00; z-index: 101; pointer-events: none;
+}
+/* dialogue box over-limit: only the FIRST over-limit line gets any indicator.
+   All subsequent over-limit lines are completely invisible — no tint, no
+   outline, no label — so they don't trash the screenplay layout. */
+.sp-box-over-limit-first .sp-preview,
+.sp-box-over-limit-first .sp-ta {
+  outline: 1px solid rgba(200,0,0,0.4);
+  border-radius: 2px;
+}
+/* The warning label is absolutely positioned so it takes ZERO vertical space. */
+.sp-box-over-limit-first {
+  position: relative;
+}
+.sp-box-over-limit-first::after {
+  content: 'Over 3-line box limit';
+  position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  font-size: 8px; color: #c00; line-height: 1;
+  pointer-events: none; white-space: nowrap;
+}
+/* 36-char limit violation indicator */
+.sp-line-over { background: rgba(200,0,0,0.07); color: #b00; border-radius: 2px; }
+.sp-line-over-badge {
+  display: inline-block; font-size: 8px; font-family: monospace;
+  background: #c00; color: #fff; border-radius: 3px;
+  padding: 0 3px; margin-left: 5px; vertical-align: super;
+}
+
+/* Fallback typo marker for preview layer when native textarea squiggles are
+   unavailable in the host environment. */
+.sp-typo-fallback {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: #c00;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 1px;
+}
+
+/* Live typo overlay while editing: keep preview (with typo squiggles) visible
+   under the focused textarea so users see spell feedback while typing. */
+.sp-block.sp-live-typo-edit { position: relative; }
+.sp-block.sp-live-typo-edit > .sp-preview {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  z-index: 2;
+  pointer-events: none;
+  white-space: pre-wrap;
+}
+.sp-ta.sp-ta-live-typo {
+  position: relative;
+  z-index: 3;
+  background: transparent !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+  caret-color: #000;
+}
+
+/* ── "Hide Dynamos" (View menu): hide every [[tag-id]] dynamo block and the
+   thin rule line it draws, so the page reads as a clean screenplay. The
+   dialogue lines stay; only the dynamo tags + their lines disappear. ── */
+.sp-hide-dynamos .sp-block[data-type="tag-id"] { display: none !important; }
+.sp-hide-dynamos .sp-block[data-type="tag-id"]::before { display: none !important; }
+
+/* ── game dialogue: the (up to 3) dialogue lines that belong to a [[tag]] box. ── */
+.sp-game-dialogue {
+  cursor: help;
+}
+/* zebra: alternating blue bands across the WHOLE box (like the preview rows) so
+   each line of the 3-line box is instantly easy to tell apart — a visual check
+   on line-breaking. Hovering ANYWHERE in the box lights up the WHOLE box at
+   once (JS adds .sp-zebra-on to every line that shares the group). */
+.sp-game-line-odd,
+.sp-game-line-even {
+  transition: background 0.1s ease;
+}
+.sp-game-line-odd.sp-zebra-on {
+  background: rgba(80, 150, 220, 0.10) !important;
+}
+.sp-game-line-even.sp-zebra-on {
+  background: rgba(80, 150, 220, 0.16) !important;
+}
+
+/* ── left-gutter "+" insert-tag affordance ── */
+.sp-gutter-add {
+  position: absolute; z-index: 60;
+  width: 22px; height: 22px; padding: 0;
+  display: none; align-items: center; justify-content: center;
+  font: 700 16px/1 Tahoma, sans-serif; color: #fff !important;
+  background: #d8a200 !important; border: 1px solid #a87e00 !important;
+  border-radius: 50% !important; cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,.4) !important;
+}
+.sp-gutter-add:hover { background: #e9b21a !important; }
+/* small marker next to the "+" button showing exactly where the inserted tag
+   will land (kept short — a full-page rule was visually loud) */
+.sp-gutter-guide {
+  position: absolute; z-index: 55; height: 0;
+  border-top: 2px solid #d8a200; pointer-events: none;
+  box-shadow: 0 0 4px rgba(216,162,0,.7); transform: translateY(-1px);
+}
+.sp-gutter-guide::before {
+  content: ''; position: absolute; left: -3px; top: -4px;
+  width: 6px; height: 6px; border-radius: 50%; background: #d8a200;
+}
+
+/* ── hover game preview (writer-only): Disgaea-style box + BBC subtitle.
+   Each dialogue LINE is its own row (line / line / line) with a char count, so
+   the 36-char-per-line budget is obvious. Fonts match the real targets:
+   gamebox = wide heavy sans (Disgaea), subtitle = Tiresias/Arial white-on-black
+   (BBC broadcast standard). NOT monospace. ── */
+.sp-gamepv {
+  position: fixed; z-index: 9999; width: min(92vw, 34em); max-width: min(92vw, 34em);
+  pointer-events: auto;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #e9edf6;
+  background: linear-gradient(165deg, rgba(20,22,30,.94), rgba(12,13,18,.95));
+  border: 1px solid rgba(255,255,255,.08); border-radius: 12px;
+  padding: 10px; backdrop-filter: blur(8px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.03);
+}
+/* fake in-game viewport — "this is what the player sees" */
+.sp-gpv-viewport {
+  position: relative; border-radius: 8px; overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 70% 10%, rgba(90,110,170,.30), transparent 60%),
+    linear-gradient(180deg, #2a3350 0%, #1a1f33 60%, #11141f 100%);
+  padding: 10px 10px 12px; min-height: 96px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 -30px 40px rgba(0,0,0,.45);
+}
+/* character portrait placeholder (monogram silhouette) */
+.sp-gpv-portrait {
+  position: absolute; top: 8px; right: 10px; width: 44px; height: 44px;
+}
+.sp-gpv-portrait-glow {
+  position: absolute; inset: -6px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,211,77,.28), transparent 70%);
+}
+.sp-gpv-portrait-mono {
+  position: relative; width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 20px; color: #0e1018;
+  background: linear-gradient(180deg, #cdd6ee, #8a96bf);
+  border: 1px solid rgba(255,255,255,.4);
+  box-shadow: 0 2px 6px rgba(0,0,0,.5);
+}
+/* NOVA textbox — dark translucent panel, thin warm accent (Persona-style) */
+.sp-gpv-box {
+  position: relative; margin-top: 52px;
+  background: linear-gradient(180deg, rgba(10,12,20,.82), rgba(6,8,14,.88));
+  border: 1px solid rgba(255,211,77,.55); border-radius: 8px;
+  padding: 12px 12px 10px 22px; color: #f4f7ff;
+  box-shadow: 0 4px 14px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.04);
+}
+.sp-gpv-name {
+  position: absolute; top: -16px; left: 12px;
+  font-weight: 800; font-size: 10px; letter-spacing: .6px; text-transform: uppercase;
+  color: #1d1500; background: linear-gradient(180deg, #ffd970, #f0a500);
+  padding: 2px 9px; border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.45);
+}
+/* Disgaea/Persona dialogue text — Minerva Modern BLACK (heavy, like the in-game
+   box lettering in the screenshots): bold weight, tight spacing. */
+.sp-gpv-text {
+  margin-top: 4px;
+  font-family: 'Minerva Modern', 'Arial Rounded MT Bold', 'Helvetica Rounded', 'Trebuchet MS', 'Arial Black', Arial, sans-serif;
+  font-weight: 900; font-size: 16px; line-height: 1.18;
+  letter-spacing: .6px; word-spacing: 1px;
+  text-shadow: 0 1px 2px rgba(0,0,0,.7);
+}
+/* one dialogue line = one row; subtle char count on the right */
+.sp-gl { display: flex; align-items: baseline; gap: 8px; white-space: pre; }
+.sp-gl-text { flex: 0 0 auto; }
+.sp-gl-count {
+  flex: 0 0 auto; margin-left: auto; font-family: 'SFMono-Regular', Menlo, monospace;
+  font-weight: 400; font-size: 9px; color: #8aa0d6; opacity: .7; align-self: center;
+}
+.sp-gl-over .sp-gl-text { color: #ffb3b3; }
+.sp-gl-over .sp-gl-count { color: #ff6b6b; opacity: 1; }
+/* Disgaea icons + highlights — yellow bold; icons sit in a round chip */
+.sp-pv-hl-game { color: #ffd34d; font-weight: 900; }
+/* variable placeholder — shown at MAX width "[NNVariable]" so the writer sees
+   the worst-case in-game spacing; light blue boxed token on the dark game box */
+.sp-pv-var-game {
+  color: #bfe3ff; font-weight: 900; letter-spacing: .2px;
+  border-bottom: 1px dashed rgba(120,190,255,.7);
+}
+.sp-pv-icon-game {
+  display: inline-block; min-width: 1.3em; height: 1.3em; line-height: 1.3em;
+  padding: 0 .15em; margin: 0 .1em; text-align: center; vertical-align: -.18em;
+  color: #2a1c00; background: radial-gradient(circle at 50% 35%, #ffe79a, #f0a500);
+  font-weight: 900; font-size: .8em; border-radius: 50%;
+  border: 1px solid #fff3c4; box-shadow: 0 1px 2px rgba(0,0,0,.5);
+  text-shadow: none;
+}
+/* timing + analytics row — what game writers care about more than page count */
+.sp-gpv-meta { padding: 8px 4px 2px; }
+.sp-gpv-timing { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.sp-gpv-timing-bar {
+  flex: 1 1 auto; height: 5px; border-radius: 3px; overflow: hidden;
+  background: rgba(255,255,255,.08);
+}
+.sp-gpv-timing-bar i {
+  display: block; height: 100%;
+  background: linear-gradient(90deg, #58c0ff, #9b8cff);
+  border-radius: 3px;
+}
+.sp-gpv-timing-val {
+  flex: 0 0 auto; font-family: 'SFMono-Regular', Menlo, monospace;
+  font-size: 11px; font-weight: 600; color: #cfe0ff;
+}
+.sp-gpv-stats {
+  display: flex; flex-wrap: wrap; gap: 5px;
+  font-family: 'SFMono-Regular', Menlo, monospace; font-size: 9px; color: #9aa6c2;
+}
+.sp-gpv-stats > span {
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.06);
+  padding: 2px 6px; border-radius: 4px; white-space: nowrap;
+}
+.sp-gpv-auto.on { color: #8be6a8; border-color: rgba(139,230,168,.3); }
+.sp-gpv-warn { color: #ff8a8a; border-color: rgba(255,138,138,.35) !important; }
+/* ── three preview modes: TALK SCENE/CUTSCENE (subtitles) · MINI-SCENE (boxes)
+   · BUBBLE (item circle). Each labelled, stacked under the hero viewport. ── */
+.sp-gpv-modes {
+  margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.07);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.sp-gpv-mode { display: flex; flex-direction: column; gap: 5px; }
+.sp-gpv-mode-label {
+  font-family: 'SFMono-Regular', Menlo, monospace; font-size: 8px; font-weight: 600;
+  letter-spacing: 1px; color: #6f7a96; text-align: center;
+}
+/* TALK SCENE / CUTSCENE — subtitle cards, max 2 lines each */
+.sp-sub-card {
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+  margin-bottom: 4px;
+}
+.sp-sub-card:last-child { margin-bottom: 0; }
+/* BUBBLE — the Persona-3 "thought" cloud: a big, full-width glowing BLUE organic
+   blob with centred italic text and a little down-arrow. For reading things in
+   the environment / inner monologue. */
+.sp-gpv-bubble {
+  position: relative;
+  width: 100%; box-sizing: border-box;
+  min-height: 4.6em; padding: 1.4em 2.2em 1.7em;
+  border-radius: 50% / 46%;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(40,70,200,.55), rgba(20,40,150,.5) 62%, rgba(20,40,150,0) 100%);
+  border: 2px solid rgba(120,170,255,.9);
+  box-shadow:
+    0 0 18px rgba(80,140,255,.7), 0 0 40px rgba(60,110,255,.35),
+    inset 0 0 22px rgba(120,170,255,.45);
+}
+/* the little downward "continue" arrow at the bottom of the cloud */
+.sp-gpv-bubble::after {
+  content: '\25BC';
+  position: absolute; bottom: .15em; left: 50%; transform: translateX(-50%);
+  font-size: 11px; color: rgba(150,190,255,.95);
+  text-shadow: 0 0 6px rgba(80,140,255,.8);
+}
+.sp-gpv-bubble-text {
+  position: relative; z-index: 1;
+  font-family: 'Minerva Modern', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700; font-size: 16px; line-height: 1.18; font-style: italic;
+  letter-spacing: .1px;
+  color: #eaf1ff; text-shadow: 0 1px 3px rgba(0,0,0,.6);
+}
+/* BBC broadcast subtitle — Reith Sans (BBC's strategic subtitle font), falling
+   back to the wide fonts the BBC recommends for authoring (Verdana/Tiresias/
+   Arial) to avoid reflow. WHITE on SOLID BLACK, centred, per-line black box with
+   ~0.5em line-padding each side (ebutts:linePadding) — that airy character
+   spacing is what you see on broadcast. */
+.sp-subtitle {
+  text-align: center; display: flex;
+  flex-direction: column; align-items: center; gap: 0;
+  font-family: 'Reith Sans', 'ReithSans', Verdana, 'Tiresias', 'Tiresias Screenfont', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
+.sp-sub-line { line-height: 1.2; position: relative; }
+.sp-sub-line span {
+  display: inline-block; max-width: 100%;
+  background: #000; color: #ffffff;
+  font-size: 16px; line-height: 1.4; font-weight: 400; letter-spacing: .4px;
+  padding: 2px 0.55em; white-space: pre;
+}
+/* a subtitle line over the 36-char limit (Disgaea/broadcast cap on both) */
+.sp-sub-over span { box-shadow: inset 0 0 0 2px #ff4d4d; }
+/* BBC subtitle icons + highlights — monochrome, just bold (white on black) */
+.sp-pv-hl-sub { font-weight: 700; }
+.sp-pv-icon-sub { font-weight: 700; }
+/* variable placeholder on subtitles — white, underlined to read as a slot */
+.sp-pv-var-sub { font-weight: 700; border-bottom: 1px dashed rgba(255,255,255,.8); }
+.sp-sub-count {
+  display: inline-block; margin-left: 6px; vertical-align: middle;
+  font-family: Tahoma, sans-serif; font-size: 9px; font-weight: 700;
+  color: #fff; background: #d40000; padding: 1px 4px; border-radius: 2px;
+}
+
+.sp-last-saved {
+  font-size: 10px;
+  color: #555;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  /* 用 fixed 定位让编辑器占满视口，解决 iOS Safari height:100% 继承断链导致无法滚动 */
+  .sp-editor {
+    position: fixed; top: 50px; left: 0; right: 0; bottom: 0;
+    width: 100vw; max-width: 100vw; height: auto;
+    display: flex; flex-direction: column;
+  }
+  .sp-page { padding: 16px; max-width: 100%; min-height: unset; }
+  .sp-layout { background: #ffffff; }
+  .sp-script-area {
+    padding: 10px;
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* 移动端剧本格式缩进 */
+  .sp-ta-character {
+    margin: 0; width: 100%;
+    text-align: center; text-transform: uppercase;
+  }
+  .sp-ta-parenthetical {
+    margin: 0; width: 100%;
+    padding-left: 12%; padding-right: 8%;
+    text-align: left; color: #a6adc8;
+  }
+  .sp-ta-dialogue {
+    margin: 0; width: 100%;
+    padding-left: 8%; padding-right: 5%;
+  }
+}
+
+/* ── save-conflict modal: shown when the file changed on disk while you had
+   unsaved local changes, so you can pick which version to keep ── */
+.sp-conflict-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.45);
+  display: flex; align-items: center; justify-content: center;
+}
+.sp-conflict-box {
+  background: #fff; color: #1a1a1a;
+  width: 460px; max-width: 92vw;
+  border-radius: 10px; padding: 0;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+.sp-conflict-title {
+  margin: 0; padding: 14px 20px 12px;
+  font-size: 14px; font-weight: 700; letter-spacing: .01em;
+  background: #c0392b; color: #fff;
+  border-radius: 10px 10px 0 0;
+}
+.sp-conflict-msg   { margin: 0; padding: 16px 20px 4px; font-size: 13.5px; line-height: 1.5; color: #333; }
+.sp-conflict-actions { display: flex; flex-direction: column; gap: 0; padding: 12px 20px 16px; }
+.sp-conflict-btn {
+  width: 100%; padding: 10px 14px; margin-top: 8px;
+  border-radius: 7px; border: 1px solid #d0d0d8;
+  font-size: 13.5px; font-weight: 600; cursor: pointer;
+  background: #f4f4f7; color: #1a1a1a; text-align: center;
+}
+.sp-conflict-btn:hover { background: #ececf2; }
+.sp-conflict-mine   { background: #2f6fb3; border-color: #2f6fb3; color: #fff; }
+.sp-conflict-mine:hover   { background: #285f99; }
+.sp-conflict-theirs { background: #fff; }
+.sp-conflict-cancel { background: transparent; border-color: transparent; color: #999; font-weight: 400; }
+.sp-conflict-cancel:hover { color: #555; }
+
+/* ── Document Info modal — Win98 / classic word-processor aesthetic ─────── */
+.sp-docinfo-modal {
+  background: #ece9d8;
+  color: #000;
+  width: 420px; max-width: 96vw;
+  border: 2px solid;
+  border-color: #fff #6a6a64 #6a6a64 #fff;
+  box-shadow: 1px 1px 0 #000, inset 1px 1px 0 #dfddce;
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+  font-size: 11px;
+  overflow: visible;
+}
+.sp-docinfo-header {
+  background: linear-gradient(to right, #0a246a, #a6b8e8);
+  color: #fff;
+  padding: 3px 8px 3px 6px;
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; gap: 6px;
+  letter-spacing: .01em;
+  user-select: none;
+}
+.sp-docinfo-body {
+  padding: 12px 14px 6px;
+  background: #ece9d8;
+  overflow: visible;
+}
+.sp-docinfo-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+  overflow: visible;
+}
+.sp-docinfo-lbl {
+  width: 82px; flex-shrink: 0; text-align: right;
+  font-size: 11px; color: #000;
+}
+.sp-docinfo-inp {
+  flex: 1; font-size: 11px; padding: 2px 4px;
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+  background: #fff; color: #000;
+  border: 2px solid; border-color: #6a6a64 #d4d0c8 #d4d0c8 #6a6a64;
+  box-shadow: inset 1px 1px 0 rgba(0,0,0,0.1);
+  outline: none; border-radius: 0 !important;
+}
+.sp-docinfo-inp:focus {
+  border-color: #316ac5 #d4d0c8 #d4d0c8 #316ac5;
+}
+select.sp-docinfo-inp {
+  cursor: default;
+  width: 100%; max-width: none !important;
+  /* let the dropdown render outside the modal box */
+  position: relative; z-index: 10000;
+}
+.sp-docinfo-sep {
+  border: none; border-top: 1px solid #6a6a64;
+  margin: 4px 0 8px;
+  box-shadow: 0 1px 0 #fff;
+}
+.sp-docinfo-foot {
+  display: flex; justify-content: flex-end; gap: 6px;
+  padding: 6px 10px 8px;
+  background: #ece9d8;
+  border-top: 1px solid #6a6a64;
+  box-shadow: inset 0 1px 0 #fff;
+}
+.sp-docinfo-btn {
+  min-width: 72px; padding: 3px 12px;
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif; font-size: 11px;
+  background: #ece9d8; color: #000;
+  border: 2px solid; border-color: #fff #6a6a64 #6a6a64 #fff;
+  box-shadow: inset 1px 1px 0 #dfddce;
+  cursor: default; text-align: center;
+  border-radius: 0 !important;
+}
+.sp-docinfo-btn:hover  { background: #e3e1d3; }
+.sp-docinfo-btn:active { border-color: #6a6a64 #fff #fff #6a6a64; box-shadow: none; }
+.sp-docinfo-apply {
+  font-weight: 700;
+  border-color: #000 #6a6a64 #6a6a64 #000;
+}
+.sp-docinfo-apply:hover { background: #dcdbd0; }
+
+/* ── Script-dictionary right-click context menu ────────────────────────── */
+.sp-spell-menu {
+  position: fixed; z-index: 99999;
+  background: #fff; color: #000;
+  border: 1px solid #6a6a64;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.35);
+  padding: 2px; min-width: 220px;
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif; font-size: 11px;
+}
+.sp-spell-word {
+  padding: 4px 16px 3px; font-weight: 700; color: #555;
+  border-bottom: 1px solid #d4d0c8; margin-bottom: 2px;
+  user-select: none;
+}
+.sp-spell-item {
+  display: block; width: 100%; text-align: left; box-sizing: border-box;
+  padding: 3px 22px; background: transparent; border: none;
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif; font-size: 11px;
+  color: #000; cursor: default; white-space: nowrap;
+  border-radius: 0 !important; box-shadow: none !important;
+  min-height: 0 !important;
+}
+.sp-spell-item:hover:not(:disabled) { background: #316ac5; color: #fff; }
+.sp-spell-item-done { color: #008000 !important; }
+.sp-spell-item-done:hover:not(:disabled) { background: transparent !important; color: #008000 !important; }
+.sp-spell-item-danger:hover:not(:disabled) { background: #a30000 !important; }
