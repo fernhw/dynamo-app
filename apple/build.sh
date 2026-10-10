@@ -5,7 +5,7 @@ set -euo pipefail
 cd "${0:A:h}"
 
 APP=build/Dynamo.app
-rm -rf "$APP"
+rm -rf "$APP" build/Dynamo.zip
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 
 for arch in arm64 x86_64; do
@@ -19,15 +19,15 @@ rm build/Dynamo-arm64 build/Dynamo-x86_64
 
 cp Dynamo/Info.plist "$APP/Contents/"
 cp Dynamo/Dynamo.icns "$APP/Contents/Resources/"
+cp -R ../web "$APP/Contents/Resources/web"
+
+codesign --force --sign - "$APP" >/dev/null
+# register .fountain association with Finder
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$APP"
 # portable copy for other Macs (ditto keeps the signature intact)
 ditto -c -k --keepParent "$APP" build/Dynamo.zip
 
 echo "built $PWD/$APP"
-echo "zip   $PWD/build/Dynamo.zip
-codesign --force --sign - "$APP" >/dev/null
-# register .fountain association with Finder
-/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$APP"
-
-echo "built $PWD/$APP"
+echo "zip   $PWD/build/Dynamo.zip"
 [[ "${1:-}" == "--open" ]] && open "$APP"
 exit 0
